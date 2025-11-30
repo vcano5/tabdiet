@@ -1,0 +1,177 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/neobrutalism.css">
+    <style>
+        body {
+            width: 350px;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .popup-container {
+            padding: 20px;
+            background: var(--primary);
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .setting-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        
+        .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 900;
+            color: var(--accent);
+        }
+        
+        .hint {
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        .radio-group,
+        .checkbox-option {
+            margin-top: 10px;
+        }
+        
+        .radio-option,
+        .checkbox-option {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .radio-option label,
+        .checkbox-option label {
+            display: inline;
+            font-weight: 700;
+            margin: 0;
+            text-transform: none;
+            font-size: 14px;
+        }
+        
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .status {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 13px;
+            min-height: 20px;
+        }
+        
+        .stats-box {
+            background: var(--accent);
+            border: var(--border-width) solid var(--text);
+            box-shadow: 4px 4px 0 var(--text);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .stats-title {
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .stats-number {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+        
+        .stats-label {
+            font-size: 13px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <h1>⚙️ TabDiet</h1>
+        
+        <div class="setting-group">
+            <label for="tabLimit">🔢 Límite de pestañas:</label>
+            <input type="number" id="tabLimit" min="1" max="100" value="5">
+        </div>
+        
+        <div class="setting-group">
+            <label for="warningTime">⏱️ Advertencia: <span class="range-value" id="warningTimeValue">20s</span></label>
+            <input type="range" id="warningTime" min="5" max="60" step="5" value="20">
+            <div class="hint">Tiempo antes de cerrar (5-60 seg)</div>
+        </div>
+        
+        <div class="setting-group">
+            <label>🎯 Estrategia de cierre:</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="oldest" name="closeStrategy" value="oldest" checked>
+                    <label for="oldest">Cerrar más antigua</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="newest" name="closeStrategy" value="newest">
+                    <label for="newest">Cerrar más nueva</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="random" name="closeStrategy" value="random">
+                    <label for="random">Cerrar aleatoria</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="setting-group">
+            <div class="checkbox-option">
+                <input type="checkbox" id="prioritizeDuplicates" checked>
+                <label for="prioritizeDuplicates">Priorizar duplicados</label>
+            </div>
+            <div class="hint">Cerrar primero dominios repetidos</div>
+        </div>
+        
+        <div class="setting-group">
+            <label for="whitelist">🛡️ Dominios protegidos:</label>
+            <textarea id="whitelist" rows="4" placeholder="vcano5.com&#10;descuentones.com&#10;ranchogamer.com"></textarea>
+            <div class="hint">Un dominio por línea</div>
+        </div>
+        
+        <div class="stats-box">
+            <div class="stats-title">📊 Pestañas cerradas</div>
+            <div class="stats-number" id="closedCount">0</div>
+            <div class="stats-label">salvadas del caos</div>
+        </div>
+        
+        <button class="save-btn btn" id="saveBtn">💾 Guardar</button>
+        <div class="status" id="status"></div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
